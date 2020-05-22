@@ -1,0 +1,130 @@
+Joshua Sweet
+Lauren Scott
+Sravani Ravula
+
+GENERAL:
+Python 3.7.3 was used for all testing
+
+Tensorflow version 1.15.0 was used for testing cDNN and Discrete Wavelet Transform while CNN and RNN were tested with version 2.1
+The optimal version for testing is 1.15.0 as it has the lowest chance of not producing correct output.
+
+Anaconda was the enviorment where are code was ran from.
+How to instal:
+Windows: https://docs.anaconda.com/anaconda/install/windows/
+Linux: https://docs.anaconda.com/anaconda/install/linux/
+Mac: https://docs.anaconda.com/anaconda/install/mac-os/
+
+On windows anaconda is opened as an application and will open as a seperate cmd instance.
+On Linux/Mac anaconda will be installed as its own enviorment, creating new PATH enviorments in the process.
+It is highly not recommened to install anaconda under a linux-subsystem for windows, as it straight does not work properly.
+
+Jupyter notebook was used to run the SVM model and vizualize the data.
+How to install:
+https://jupyter.org/install.html
+Look under "Installing Jupyter Notebook using Conda"
+Do note you need to install anaconda first. (See above)
+A Jupyter Notebook instance is started by typing "Jupyter Notebook" into the anaconda instance.
+When it starts up, it will prompt you with a localhost link to put in your browser.
+Helpful information on how to use: https://jupyter-notebook.readthedocs.io/en/stable/
+
+IMPORTS:
+All relative imports can be installed by doing "pip install <import>"
+If you setup anaconda right then "pip" should default to installing for Python 3.
+
+The only exception is Tensorflow, which is installed to be optimized for anaconda itself.
+Tensorflow is installed by doing "conda install tensorflow" in the anaconda enviorment.
+
+Note that this does not include external file imports. (See more below)
+
+FILES:
+SVM.ipynb: The Juypter SVM machine learning model.
+learn_wavelet_transform.py: The Discrete Wavelet Transform cDNN model
+learn.py: The Convolutional Neural Network (CNN) model
+test_extraction_single.py: The cDNN Neural Network model
+RNN.py: The Recurrent Neural Network (RNN) model
+
+EXTERNAL FILES:
+Both the neural networks and the SVM model use an external "find_peak" function.
+This function is contained in a file "find_peak.py"
+The file can be supplied if needed.
+
+DATASET:
+The project used a MIT dataset for testing as the actual data was not available at the given time.
+The datatset can be found here: https://physionet.org/content/mitdb/1.0.0/
+
+For each set of data, there should be four files with the extensions ".atr", ".dat", ".hea", ".xws"
+Each is stored with filenames that are composed of numbers. All relative files part of a given set have the same number.
+
+The files are as follows:
+100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 111, 112, 113,
+114, 115, 116, 117, 118, 119, 121, 122, 123, 124, 200, 201, 202,
+203, 205, 207, 208, 209, 210, 212, 213, 214, 215, 217, 219, 220,
+221, 222, 223, 228, 230, 231, 232, 233, 234
+
+For the SVM model, each file is loaded from wfdb waveform data stored in "./MIT dataset/"
+The SVM model uses the raw files taken from the datasets.
+
+The neural networks use a compressed file which contains all the datatsets stored in a file called "data_90"
+Another file "data_denoised" also exists but was not used
+The master students can supply these files when needed.
+
+CLASSIFIERS:
+Each classifier is dennoted with a number that ranges from 0-39. Additionally, each classifier has a letter classifier that represents the actual description in one character. 
+The classifiers themselves represent current states the of the heart, with a majority being conditional heart problems.
+
+The number -> letter -> coniditon is defined below as:
+    label_store symbol                                    description
+0             0                              Not an actual annotation
+1             1      N                                    Normal beat
+2             2      L                  Left bundle branch block beat
+3             3      R                 Right bundle branch block beat
+4             4      a                Aberrated atrial premature beat
+5             5      V              Premature ventricular contraction
+6             6      F          Fusion of ventricular and normal beat
+7             7      J              Nodal (junctional) premature beat
+8             8      A                   Atrial premature contraction
+9             9      S     Premature or ectopic supraventricular beat
+10           10      E                        Ventricular escape beat
+11           11      j                 Nodal (junctional) escape beat
+12           12      /                                     Paced beat
+13           13      Q                            Unclassifiable beat
+14           14      ~                          Signal quality change
+16           16      |                     Isolated QRS-like artifact
+18           18      s                                      ST change
+19           19      T                                  T-wave change
+20           20      *                                        Systole
+21           21      D                                       Diastole
+22           22      "                             Comment annotation
+23           23      =                         Measurement annotation
+24           24      p                                    P-wave peak
+25           25      B              Left or right bundle branch block
+26           26      ^                      Non-conducted pacer spike
+27           27      t                                    T-wave peak
+28           28      +                                  Rhythm change
+29           29      u                                    U-wave peak
+30           30      ?                                       Learning
+31           31      !                       Ventricular flutter wave
+32           32      [      Start of ventricular flutter/fibrillation
+33           33      ]        End of ventricular flutter/fibrillation
+34           34      e                             Atrial escape beat
+35           35      n                   Supraventricular escape beat
+36           36      @  Link to external data (aux_note contains URL)
+37           37      x             Non-conducted P-wave (blocked APB)
+38           38      f                Fusion of paced and normal beat
+39           39      (                                 Waveform onset
+
+The above applies to both the neural networks and the SVM model.
+
+HOW TO RUN:
+The SVM model is ran from juypter and is started by clicking the "run" button at the top when the iPython is open.
+The neural networks are ran by typing "python <model>" in the anaconda enviorment.
+
+HOW TO USE:
+Should these files be used for information or testing, here is what you do:
+1. Record the output it produces. For neural networks, easiest way is to run the model with "python <model> > output.txt"
+2. Modify a set of values in the model, spcifically epochs, k-folds, testing size, and optimizers for neural networks and the amount of features for the SVM model.
+3. Additionally, modifying the samplerates as well could have affect on the prediction results.
+4. Run that model again and compare the results to the previous.
+5. Repeat for a different model and compare the results it produces to the other models.
+
+Main points of intrest to look for are accuracy and run time.
